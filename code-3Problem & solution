@@ -1,0 +1,155 @@
+Create a shell script that performs the following operations using functions:
+i. Append content from one file to another (input2.txt to input1.txt)
+ii. Find and replace a word in the file (input1.txt)
+iii. Display the longest word in the file (input1.txt)
+
+Note:
+Use SWITCH OR IF and handle 1 menu at a time. DO NOT USE LOOP TO HANDLE MENUS. IF YOU USE LOOP THEN VALIDATE WILL TAKE LONG TIME.
+
+Function Specifications:
+
+append_file() – This function appends content from a source file to a destination file.
+find_replace() – This function finds and replaces a word in the specified file.
+display_longest_word() – This function displays the longest word in the specified file.
+
+Input Format: 
+
+Give the input as a file.
+
+Output Format:
+
+Display the output in the console.
+[All text in bold corresponds to input and the rest corresponds to output.]
+
+Input File: (input1.txt)
+
+Bash shell 
+
+(input2.txt)
+
+scripting
+
+input1.txt after appending:
+
+Bash shellscripting
+
+Sample Input and Output1:
+
+1. Append content from one file to another
+2. Find and replace a word in the file
+3. Display the longest word in the file
+4. Exit
+Enter your Choice(1-4):
+1
+Enter the name of the source file:
+input2.txt
+Enter the name of the destination file:
+input1.txt
+Content from input2.txt appended to input1.txt.
+
+Sample Input and Output2:
+
+1. Append content from one file to another
+2. Find and replace a word in the file
+3. Display the longest word in the file
+4. Exit
+Enter your Choice(1-4):
+2
+Enter the file name:
+input1.txt
+Enter the word to find:
+Scripting
+Enter the word to replace:
+language
+Word 'Scripting' replaced with 'language' in input1.txt.
+
+Sample Input and Output3:
+
+1. Append content from one file to another
+2. Find and replace a word in the file
+3. Display the longest word in the file
+4. Exit
+Enter your Choice(1-4):
+3
+Enter the file name:
+input1.txt
+Longest word in input1.txt is: language
+
+Sample Input and Output4:
+
+1. Append content from one file to another
+2. Find and replace a word in the file
+3. Display the longest word in the file
+4. Exit
+Enter your Choice(1-4):
+4
+Exiting
+--------------------------------------------------
+#!/bin/bash
+display_longest_word()
+{ 
+    file=$1
+        longest=$(awk '{ for(i=1; i<=NF; i++)
+                if(length($i)>max)
+                {
+                    max=length($i);
+                    word=$i;
+                }
+                }
+                END{
+                    print word
+                }' "$file")
+                echo "Longest word in input1.txt is: $longest"
+}
+
+append_file()
+{
+        cat "$file1">>"$file2"
+        echo "Content from input2.txt appended to input1.txt."
+}
+
+find_replace()
+{
+      sed 's/"$word"/"$replace"/g'  "$file1"
+      echo "Word '"$word"' replaced with '"$replace"' in $file1."
+}
+
+
+echo "1. Append content from one file to another"
+echo "2. Find and replace a word in the file"
+echo "3. Display the longest word in the file"
+echo "4. Exit"
+echo "Enter your Choice(1-4):"
+read choice
+
+case $choice in
+
+    1)
+          echo "Enter the name of the source file:"
+          read file1
+          echo "Enter the name of the destination file:"
+          read file2
+          append_file "$file1" "$file2"
+        ;;
+    2)
+        echo "Enter the file name:"
+        read file1
+        echo "Enter the word to find:"
+        read word
+        echo "Enter the word to replace:"
+        read replace
+        find_replace "$file1" "$word" "$replace"
+    ;;
+    3)
+      echo  "Enter the file name:"
+      read file1
+      display_longest_word "$file1"
+    ;;
+    4)
+        echo "Exiting"
+        exit 0
+    ;;
+      *)
+         echo "Invalid choice"
+    ;;
+esac
