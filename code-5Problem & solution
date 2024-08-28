@@ -1,0 +1,160 @@
+Create a shell script that performs the following operations using functions:
+i. Reverse the content of each line in a file (input1.txt)
+ii. Check if a file contains a specific word (input1.txt)
+iii. Count the number of unique words in a file (input1.txt)
+iv. Display the first n lines of a file (input1.txt)
+
+Note:
+Use SWITCH OR IF and handle 1 menu at a time. DO NOT USE LOOP TO HANDLE MENUS. IF YOU USE LOOP THEN VALIDATE WILL TAKE LONG TIME.
+
+Function Specifications:
+
+reverse_content() – This function reverses the content of each line in the file.
+check_word() – This function checks if a specific word is present in the file.
+count_unique_words() – This function counts the number of unique words in the file.
+display_first_n_lines() – This function displays the first n lines of the file.
+
+Input Format: 
+
+Give the input as a file.
+
+Output Format:
+
+Display the output in the console.
+[All text in bold corresponds to input and the rest corresponds to output.]
+
+Input File: (input1.txt)
+
+Bash shell 
+
+input1.txt after reversing:
+
+llehs hsaB
+
+Sample Input and Output1:
+
+1. Reverse the content of each line in a file
+2. Check if a file contains a specific word
+3. Count the number of unique words in a file
+4. Display the first n lines of a file
+5. Exit
+Enter your Choice(1-5):
+1
+Content of each line in input1.txt reversed.
+
+Sample Input and Output2:
+
+1. Reverse the content of each line in a file
+2. Check if a file contains a specific word
+3. Count the number of unique words in a file
+4. Display the first n lines of a file
+5. Exit
+Enter your Choice(1-5):
+2
+Enter the word to search for:
+SHELL
+The word 'SHELL' is present in the file.
+
+Sample Input and Output3:
+
+1. Reverse the content of each line in a file
+2. Check if a file contains a specific word
+3. Count the number of unique words in a file
+4. Display the first n lines of a file
+5. Exit
+Enter your Choice(1-5):
+3
+Number of unique words in input1.txt: 5
+
+Sample Input and Output4:
+
+1. Reverse the content of each line in a file
+2. Check if a file contains a specific word
+3. Count the number of unique words in a file
+4. Display the first n lines of a file
+5. Exit
+Enter your Choice(1-5):
+4
+Enter the number of lines to display:
+2
+Shell scripting involves creating text files that contain a sequence of commands to be executed by an operating system.
+A bash script is a series of commands written in a file.
+----------------------------------------------------------------
+#!/bin/bash
+check_word()
+{
+     if [ -f input1.txt ]
+     then 
+     echo "Enter the word to search for:"
+     read word
+          if grep  -q "$word" input1.txt
+          then 
+             echo "The word '$word' is present in the file."
+        
+        else
+           echo "The word '$word' is not present in the file."
+        fi
+    else
+    echo "file not found"
+    fi
+}
+
+
+
+reverse_content()
+{
+     if [ -f input1.txt ]
+     then 
+        rev <input1.txt>temp.txt
+        mv temp.txt input1.txt
+        echo "Content of each line in input1.txt reversed."
+    else
+       echo "not found"
+    fi
+}
+display_first_n_lines ()
+{
+    echo "Enter the number of lines to display:"
+    read n
+    head -n $n input1.txt
+}
+
+count_unique_words()
+{
+        if [[ -f input1.txt ]]
+        then
+            n=$(tr '[:space:]' '[\n*]' <input1.txt | sort | uniq -c | wc -l)
+            echo "Number of unique words in input1.txt: $n"
+        else
+         echo "file not exits"
+        fi
+}
+
+echo "1. Reverse the content of each line in a file"
+echo "2. Check if a file contains a specific word"
+echo "3. Count the number of unique words in a file"
+echo "4. Display the first n lines of a file"
+echo "5. Exit"
+echo "Enter your Choice(1-5): " 
+read choice
+
+case $choice in
+    1)
+        reverse_content 
+        ;;
+    2)
+        check_word 
+        ;;
+    3)
+        count_unique_words 
+        ;;
+    4)
+        display_first_n_lines 
+        ;;
+    5)
+        echo "Exiting."
+        ;;
+    *)
+        echo "Invalid choice. Please select a number between 1 and 5."
+        ;;
+esac
