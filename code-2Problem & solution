@@ -1,0 +1,106 @@
+Create a shell script that performs the following mathematical operations using functions:
+i. Calculate the square of a number
+ii. Find the greatest common divisor (GCD) of two numbers
+
+Note:
+Handle only 1 menu at a time. DO NOT USE LOOP TO DISPLAY THE MENUS AGAIN AND AGAIN. IF YOU USE LOOP FOR MENUS THEN VALIDATE WILL TAKE LONG TIME.
+
+Function Specifications:
+calculate_square() – This function gets the number and calculates the square of that number.
+find_gcd() – This function calculates the gcd of two numbers.
+
+[All text in bold corresponds to input and the rest corresponds to output.]
+
+Sample Input and Output1:
+
+1. Calculate the square of a number
+2. Find the greatest common divisor (GCD) of two numbers
+3. Exit
+Enter your Choice(1-3):
+1
+Enter the number:
+5
+square of 5 is 25
+
+Sample Input and Output2:
+
+1. Calculate the square of a number
+2. Find the greatest common divisor (GCD) of two numbers
+3. Exit
+Enter your Choice(1-3):
+2
+Enter the first number:
+12
+Enter the second number:
+18
+Greatest Common Divisor (GCD) is 6.
+
+Sample Input and Output3:
+
+1. Calculate the square of a number
+2. Find the greatest common divisor (GCD) of two numbers
+3. Exit
+Enter your Choice(1-3):
+2
+Enter the first number:
+24
+Enter the second number:
+36
+Greatest Common Divisor (GCD) is 12.
+
+Sample Input and Output4:
+
+1. Calculate the square of a number
+2. Find the greatest common divisor (GCD) of two numbers
+3. Exit
+Enter your Choice(1-3):
+1
+Enter the number:
+100
+square of 100 is 10000
+---------------------------------------------------------------------------------------
+#!/bin/bash
+
+calculate_square() {
+    local num=$1
+    echo "Square of $num is $((num * num))."
+}
+
+find_gcd() {
+    local a=$1
+    local b=$2
+    while (( b ))
+    do
+        local temp=$b
+        b=$((a % b))
+        a=$temp
+    done
+    echo "Greatest Common Divisor (GCD) is $a."
+}
+
+echo "1. Calculate the square of a number"
+echo "2. Find the greatest common divisor (GCD) of two numbers"
+echo "3. Exit"
+echo -n "Enter your Choice(1-3): "
+read choice
+
+case $choice in
+    1)
+        echo -n "Enter the number: "
+        read num
+        calculate_square $num
+        ;;
+    2)
+        echo -n "Enter the first number: "
+        read num1
+        echo -n "Enter the second number: "
+        read num2
+        find_gcd $num1 $num2
+        ;;
+    3)
+        exit 0
+        ;;
+    *)
+        echo "Invalid choice"
+        ;;
+esac
