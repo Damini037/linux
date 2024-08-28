@@ -1,0 +1,111 @@
+Temperature of antartica
+Naina is a travel explorer, who gathers the geographical or scientific information about the location before every travel. She has to explorer the geographical condition of Antarctica. In Antarctica, the temperature at 12 noon was n°C above zero. It decreases at the rate of m°C per hour until midnight. Help her to find the temperature at midnight for a given m and n by writing a program.
+
+Input Format:
+Input consists of 2 lines. Each line consists of an integer.
+
+Output Format:
+The output consists of a single line. Refer sample output for the format.
+[Text in bold corresponds to the input]
+
+Sample Input and Output 1:
+Enter the temperature of Antarctica at 12 noon in degrees
+16
+Enter the rate of decrease of temperature in degrees
+1
+The temperature at midnight is 4 degree Celsius
+
+Sample Input and Output 2:
+Enter the temperature of Antarctica at 12 noon in degrees
+10
+Enter the rate of decrease of temperature in degrees
+2
+The temperature at midnight is -14 degree Celsius
+
+----------------------------------------------------------------
+#!/bin/bash
+
+echo "Enter the temperature of Antarctica at 12 noon in degrees"
+read t
+echo "Enter the rate of decrease of temperature in degrees"
+read d
+res=$((t-d*12))
+echo "The temperature at midnight is $res degree Celsius"
+************************************************************************************************************************************
+Birthday Gift
+Shilpa is wrapping birthday gifts for her friend. A circle of radius x cm is cut out from a square piece of a gift wrapper having side y cm, help her to determine the area of the leftover wrapper sheet to wrap the rest of the gifts by writing a program.
+
+Input and Output Format:
+Input consists of integers.
+Display the output in float up to two decimal places
+pi=3.141
+Text in bold corresponds to the input
+
+Sample Input and Output:
+Enter the side of the square in cm
+20
+Enter the radius of the circle in cm
+7
+The area of the leftover wrapper 246.09 cm square
+
+------------------------------------------------------------------
+#!/bin/bash
+
+echo "Enter the side of the square in cm"
+read side
+echo "Enter the radius of the circle in cm"
+read radius
+res=$((side*side))
+res1=$(echo   "scale=2; 3.141*$radius*$radius"  | bc)
+r=$(echo "  $res-$res1" | bc) 
+printf "The area of the leftover wrapper %.2f cm square" $r
+****************************************************************************************************
+Calculating Gain Percentage
+ 
+
+Vikram buys an old scooter for Rs. A and spends Rs. B on its repairs. If he sells the scooter for Rs. C , what is his gain %?
+
+
+Write a program to compute the gain %.
+
+Input Format:
+
+The first input is an integer which corresponds to A. The second input is an integer which corresponds to B. The third input is a float which corresponds to gain %.
+
+Output Format:
+
+Refer sample input and output for formatting specifications.
+
+The float values are displayed correct to 2 decimal places.
+
+Sample Input and Output:
+
+[All text in bold corresponds to input and the rest corresponds to output]
+
+
+Price of old scooter:
+
+4700
+
+Repair amount:
+
+800
+
+Selling price:
+
+5800
+
+Gain percentage is 5.45
+----------------------------------------------------------------------------------
+#!/bin/bash
+
+echo "Price of old scooter:"
+read a
+echo "Repair amount:"
+read b
+echo "Selling price:"
+read c
+
+res1=$(echo "$c-($a+$b)" |bc)
+res=$(echo "scale=2; $res1*100/($a+$b)" | bc)
+echo "Gain percentage is " $res
